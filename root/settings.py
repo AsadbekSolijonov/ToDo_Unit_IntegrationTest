@@ -21,6 +21,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'task',
     'rest_framework',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -98,3 +101,24 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "To Do API",
+    "DESCRIPTION": "My Project",
+    "VERSION": "1.0.0",
+    'SERVE_INCLUDE_SCHEMA': False,
+    "PERMISSION_CLASSES": ['rest_framework.permissions.IsAuthenticated']
+}
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
+}
